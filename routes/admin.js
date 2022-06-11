@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const productHelper = require('../helpers/product-helper');
 
 const router = express.Router();
 
@@ -13,5 +14,12 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.send('Birds home page')
   }) 
+
+router.post("/addProduct",(req,res)=>{
+  //console.log(req.body);
+  productHelper.addProduct(req.body)
+  res.json({sucess:true});
+})
+
 
   module.exports = router
