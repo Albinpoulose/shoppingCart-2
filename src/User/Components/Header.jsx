@@ -1,6 +1,10 @@
 import React, { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
+
 
 const Header = () => {
+  const user = useSelector(state=>state.user.info)
+  console.log(user);
   const [drawer, setDrawer] = useState(false);
   return (
     <Fragment>
@@ -87,7 +91,9 @@ const Header = () => {
           </div>
           <div className="dropdown dropdown-end">
             <label tabIndex="0" className="">
-              <div className="indicator">
+              <div 
+              
+              className="indicator">
                 <span className="indicator-item badge badge-secondary">0</span>
 
                 <svg
@@ -116,7 +122,8 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div>
+          <div className="flex justify-center cursor-pointer">
+            <span className="flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-8 w-8"
@@ -131,6 +138,8 @@ const Header = () => {
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
               />
             </svg>
+              </span>
+              <span className="flex items-center">{user.name}</span>
           </div>
         </div>
       </div>

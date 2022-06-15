@@ -1,17 +1,17 @@
 import React from "react";
-import Product from "./Product";
+
 
 const QuickView = ({ product }) => {
   // if(!open) return null
 
   return (
-    <div className="flex p-2 flex-col  justify-center items-center">
-      <div className="">
+    <div className="flex p-2 flex-col justify-center items-center sm:flex-row ">
+      <div className="sm:w-1/2">
         <figure>
           <img src={product.productUrl} alt="" />
         </figure>
       </div>
-      <div className="p-2 flex flex-col bg-slate-200 rounded-sm">
+      <div className="p-2  flex flex-col bg-slate-100 rounded-sm sm:w-1/2 sm:p-3">
         <h1 className="font-bold text-4xl">{product.ProductName}</h1>
         <div className="rating rating-xs pt-1">
           <input
@@ -41,7 +41,7 @@ const QuickView = ({ product }) => {
             className="mask mask-star-2 bg-orange-400"
           />
         </div>
-        <div class="divider"></div>
+        <div className="divider"></div>
         <p className="text-slate-500 text-justify mx-2">
           {product.productDesc}
         </p>
@@ -50,7 +50,7 @@ const QuickView = ({ product }) => {
           <span className="text-slate-500 font- font-light">AVAILABILITY:</span>
           <span className="font-bold"> MANY IN STOCK</span>
         </p>
-        <div class="divider"></div>
+        <div className="divider"></div>
         <div className="flex w-full justify-center">
           <button className="btn p-0 btn-outline w-36 h-8 btn-xs space-x-1 rounded-sm">
             <span>
@@ -72,8 +72,8 @@ const QuickView = ({ product }) => {
             <span>ADD TO CART</span>
           </button>
         </div>
-        <div class="divider"></div>
-        <div></div>
+        <div className="divider"></div>
+        <div>Soaicl media</div>
       </div>
     </div>
   );

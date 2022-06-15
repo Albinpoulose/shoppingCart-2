@@ -1,22 +1,15 @@
-import axios from "axios";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import QuickView from "./QuickView";
+import {  useDispatch } from 'react-redux';
+import { setProductId } from "../../Redux/Slice/ProductSlice";
 
-const Product = () => {
+
+const Product = ({ products }) => {
+  const navigate = useNavigate();
   const [hoverState, setHoverState] = useState("");
-  const [products, setProducts] = useState("");
   const [quickView, setQuickView] = useState("");
-
-  useEffect(() => {
-    axios.get("http://localhost:4000/allProduct").then((response) => {
-      console.log(response.data);
-      setProducts(response.data);
-    });
-  }, []);
-
-  // const handleQuickView = (productId) => {
-  //   <QuickView productId/>
-  // };
+  const dispatch = useDispatch();
 
   return (
     <Fragment>
@@ -36,27 +29,21 @@ const Product = () => {
                 >
                   <figure>
                     <img
+                    onClick={()=>{
+                      dispatch(setProductId(product)) 
+                      navigate('/productInfo')
+                    }}
                       className="m-0 p-1 h-44 w-60"
                       src={product.productUrl}
                       alt="Shoes"
                     />
                     {hoverState === product._id && (
-                      // <div
-                      //   // onClick={() => {
-                      //   //   setQuickView(true)
-                      //   // }}
-                      //   htmlFor="my-modal-3"
-                      //   className="absolute bottom-[148px] bg-slate-600 rounded-sm w-full text-center text-white font-bold p-2"
-                      // >
-                      //   QUICK VIEW
-
-                      // </div>
                       <label
-                      onClick={()=>setQuickView(product)}
+                        onClick={() => setQuickView(product)}
                         htmlFor="my-modal-3"
                         className="absolute modal-button bottom-[148px] bg-slate-600 rounded-sm w-full text-center text-white font-bold p-2"
                       >
-                        open modal
+                        QUICK VIEW
                       </label>
                     )}
                   </figure>
@@ -134,17 +121,16 @@ const Product = () => {
           {/* new Product end  */}
         </div>
       </div>
-      {/* <QuickView open ={quickView} onClose={()=>setQuickView(false)}/> */}
       <input type="checkbox" id="my-modal-3" className="modal-toggle" />
       <div className="modal modal-middle ">
-        <div className="modal-box relative p-0 modal-middle">
+        <div className="modal-box relative p-0 modal-middle md:max-w-full rounded-sm">
           <label
             htmlFor="my-modal-3"
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
           </label>
-          <QuickView product = {quickView} />
+          <QuickView product={quickView} />
         </div>
       </div>
     </Fragment>
