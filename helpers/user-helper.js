@@ -7,8 +7,10 @@ module.exports = {
     let { name, email, password } = userDetails;
 
     return new Promise(async (resolve, reject) => {
-      bcrypt.hash(password, 10, function (err, hash) {
-        console.log(hash);
+      const saltRounds = 10;
+     // console.log(name, email, password);
+      bcrypt.hash(password, saltRounds, function (err, hash) {
+        console.log(hash); 
         if (!err) {
           password = hash;
           const user = new User({
@@ -25,6 +27,7 @@ module.exports = {
             }
           });
         } else {
+          console.log(err);
           reject("Could not generate HASH");
         }
       });
