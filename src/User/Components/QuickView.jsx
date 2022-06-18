@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const QuickView = ({ product }) => {
   // if(!open) return null
 
