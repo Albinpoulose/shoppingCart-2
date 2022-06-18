@@ -9,8 +9,8 @@ const Home = () => {
   const [products, setProducts] = useState("");
   useEffect(() => {
     axios
-      //.get(`${REACT_APP_DEPLOY_API}/allProduct`)
-      .get(`${process.env.REACT_APP_DEV_API}/allProduct`)
+      .get(`${REACT_APP_DEPLOY_API}/allProduct`)
+//       .get(`${process.env.REACT_APP_DEV_API}/allProduct`)
       .then((response) => {
         console.log(response.data);
         setProducts(response.data);
