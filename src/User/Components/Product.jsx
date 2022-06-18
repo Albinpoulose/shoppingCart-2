@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import QuickView from "./QuickView";
 import {  useDispatch } from 'react-redux';
 import { setProductId } from "../../Redux/Slice/ProductSlice";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 
 const Product = ({ products }) => {
@@ -10,6 +12,20 @@ const Product = ({ products }) => {
   const [hoverState, setHoverState] = useState("");
   const [quickView, setQuickView] = useState("");
   const dispatch = useDispatch();
+  const user = useSelector(state=>state.user.info)
+
+  const addToCart = (productId)=>{
+    //console.log(productId);
+    if(user){
+      const data  = {
+        productId,
+        userId : user._id    
+      }
+      axios.post("http://localhost:4000/addtocart",data)
+    }else{
+      console.log("User dose not exist");
+    }
+  }
 
   return (
     <Fragment>
@@ -108,7 +124,10 @@ const Product = ({ products }) => {
                             />
                           </svg>
                         </span>
-                        <span>ADD TO CART</span>
+                        <span 
+                        onClick={()=>addToCart(product._id)}
+                        className="cursor-pointer"
+                        >ADD TO CART</span>
                       </button>
                     </div>
                   </div>
