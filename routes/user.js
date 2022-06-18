@@ -1,4 +1,5 @@
 const express = require("express");
+const cartHelper = require("../helpers/cart-helper");
 const productHelper = require("../helpers/product-helper");
 const userHelper = require("../helpers/user-helper");
 const router = express.Router();
@@ -29,6 +30,10 @@ router.post("/login",(req,res)=>{
   userHelper.login(req.body).then((response)=>{
     res.json(response)
   })
+});
+
+router.post("/addtocart",(req,res)=>{
+  cartHelper.addToCart(req.body)
 })
 
 module.exports = router;
