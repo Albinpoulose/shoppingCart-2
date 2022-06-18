@@ -13,7 +13,7 @@ const Login = () => {
   const handleLogin = () => {
     const data = { email, password };
     axios
-     .post(`${REACT_APP_DEPLOY_API}/login`, data)
+     .post(`${process.env.REACT_APP_DEPLOY_API}/login`, data)
 //     .post(`${process.env.REACT_APP_DEV_API}/login`,data)
     .then((response) => {
       // console.log(response);
