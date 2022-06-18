@@ -15,7 +15,7 @@ const Signup = () => {
       password,
     };
     axios
-     .post(`${REACT_APP_DEPLOY_API}/signup`, data)
+     .post(`${process.env.REACT_APP_DEPLOY_API}/signup`, data)
      // .post(`${process.env.REACT_APP_DEV_API}/signup`,data) 
      .then((response) => {
         console.log("server response", response);
