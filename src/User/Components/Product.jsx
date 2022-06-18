@@ -1,31 +1,32 @@
 import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuickView from "./QuickView";
-import {  useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { setProductId } from "../../Redux/Slice/ProductSlice";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
 
 const Product = ({ products }) => {
   const navigate = useNavigate();
   const [hoverState, setHoverState] = useState("");
   const [quickView, setQuickView] = useState("");
   const dispatch = useDispatch();
-  const user = useSelector(state=>state.user.info)
+  const user = useSelector((state) => state.user.info);
 
-  const addToCart = (productId)=>{
+  const addToCart = (productId) => {
     //console.log(productId);
-    if(user){
-      const data  = {
+    if (user) {
+      const data = {
         productId,
-        userId : user._id    
-      }
-      axios.post("http://localhost:4000/addtocart",data)
-    }else{
+        userId: user._id,
+      };
+      axios
+      // .post(`${REACT_APP_DEPLOY_API}/addtocart`, data);
+       .post(`${process.env.REACT_APP_DEV_API}/addtocart`,data)
+    } else {
       console.log("User dose not exist");
     }
-  }
+  };
 
   return (
     <Fragment>
@@ -45,10 +46,10 @@ const Product = ({ products }) => {
                 >
                   <figure>
                     <img
-                    onClick={()=>{
-                      dispatch(setProductId(product)) 
-                      navigate('/productInfo')
-                    }}
+                      onClick={() => {
+                        dispatch(setProductId(product));
+                        navigate("/productInfo");
+                      }}
                       className="m-0 p-1 h-44 w-60"
                       src={product.productUrl}
                       alt="Shoes"
@@ -124,10 +125,12 @@ const Product = ({ products }) => {
                             />
                           </svg>
                         </span>
-                        <span 
-                        onClick={()=>addToCart(product._id)}
-                        className="cursor-pointer"
-                        >ADD TO CART</span>
+                        <span
+                          onClick={() => addToCart(product._id)}
+                          className="cursor-pointer"
+                        >
+                          ADD TO CART
+                        </span>
                       </button>
                     </div>
                   </div>
