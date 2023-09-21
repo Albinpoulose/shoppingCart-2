@@ -3,6 +3,7 @@ import Banner from "../Components/Banner";
 import Header from "../Components/Header";
 import Product from "../Components/Product";
 import Ribbon from "../Components/Ribbon";
+import Footer from "../Components/Footer";
 import axios from "axios";
 
 const Home = () => {
@@ -12,7 +13,6 @@ const Home = () => {
       .get(`${process.env.REACT_APP_DEPLOY_API}/allProduct`)
 //       .get(`${process.env.REACT_APP_DEV_API}/allProduct`)
       .then((response) => {
-        console.log(response.data);
         setProducts(response.data);
       })
       .catch((error) => {
@@ -26,6 +26,7 @@ const Home = () => {
       <Ribbon />
       <Banner />
       <Product products={products} />
+      <Footer/>
     </div>
   );
 };
